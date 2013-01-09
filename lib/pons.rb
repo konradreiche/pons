@@ -1,5 +1,3 @@
-#!/usr/bin/env ruby -w
-
 # Encapsulates the tool functionality: translating a string input to
 # multiple commands and executing the commands on a subshell.
 #
@@ -24,9 +22,4 @@ class Pons
   def self.execute_adb_shell_commands(commands)
     commands.each{|c| system("adb shell #{c}")}
   end
-end
-
-if __FILE__ == $0
-  commands = Pons.translate_string_commands(ARGV[0])
-  Pons.execute_adb_shell_commands(commands)
 end
