@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'Pons'
+require 'pons'
 
 class PonsTests < MiniTest::Unit::TestCase
 
