@@ -12,14 +12,15 @@ class Pons
     "'"  => "KEYCODE_APOSTROPHE"
   ]
 
-  def self.translate_string_commands(input)
-    input.split(/([#{Regexp.escape @@keycodes.keys.join}])/).map do |str|
-      @@keycodes.key?(str) ?
-      "input keyevent #{@@keycodes[str]}" : "input text #{str}" unless str.empty?
+  def self.translate_string_commands(input, opts)
+    result = input.split(/([#{Regexp.escape @@keycodes.keys.join}])/).map do |str|
+      @@keycodes.key?(str) ? "input keyevent #{@@keycodes[str]}" : "input text #{str}" unless str.empty?
     end.compact
+    result.unshift("input keyevent KEYCODE_MENU") if opts[:home]
+    result
   end
 
   def self.execute_adb_shell_commands(commands)
-    commands.each{|c| system("adb shell #{c}")}
+    commands.each{ |c| system("adb shell #{c}") }
   end
 end

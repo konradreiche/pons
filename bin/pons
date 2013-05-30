@@ -1,6 +1,19 @@
 #!/usr/bin/env ruby -w
 
 require 'pons'
+require 'trollop'
 
-commands = Pons.translate_string_commands(ARGV[0])
+p = Trollop::Parser.new do
+  opt :home, "Send Home button signal"
+end
+
+text = ARGV.last
+raise Trollop::HelpNeeded if text.nil?
+
+opts = Trollop::with_standard_exception_handling p do
+  raise Trollop::HelpNeeded if ARGV.empty?
+  p.parse ARGV
+end
+
+commands = Pons.translate_string_commands(text, opts)
 Pons.execute_adb_shell_commands(commands)

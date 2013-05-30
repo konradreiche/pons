@@ -12,7 +12,7 @@ Pons, Latin for *Bridge*, is a command-line tool for writing text from your shel
 Get the repository, build, then install the gem and you are good to go
 
 ```
-$ git clone git://github.com/platzhirsch/pons.git
+$ git clone git://github.com/platzhirsch/pons.git && cd pons
 $ gem build pons.gemspec
 $ gem install pons-0.0.1.gem
 $ pons 'Hey there!'
